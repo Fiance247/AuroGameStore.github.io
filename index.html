@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <title>Auro Game Store - Gold Tarif</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#0b1d3a, #081225);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+    header h1 {
+      color: #ffd700;
+    }
+    .card {
+      background: rgba(255,255,255,0.08);
+      margin: 20px auto;
+      padding: 25px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255,215,0,0.3);
+    }
+    select, button {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    select { width: 200px; }
+    .info {
+      margin-top: 20px;
+      background: rgba(0,0,0,0.4);
+      padding: 15px;
+      border-radius: 10px;
+    }
+    a {
+      color: #00ffff;
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+    /* Snow animation */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      z-index: 9999;
+      user-select: none;
+      pointer-events: none;
+      color: #fff;
+      font-size: 1em;
+      animation-name: fall;
+      animation-duration: 10s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10px); }
+      100% { transform: translateY(100vh); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎄 Auro Game Store 🎮</h1>
+  <p>Түргэн шуурхай захиалсан Gold Account-ыг шууд өгнө</p>
+</header>
+
+<div class="card">
+  <h2>Gold Tarif</h2>
+
+  <select id="tarifSelect">
+    <option value="">Сонгоно уу</option>
+    <option value="100G">100G - 4,500 MNT</option>
+    <option value="500G">500G - 16,000 MNT</option>
+    <option value="1000G">1000G - 24,000 MNT</option>
+    <option value="3000G">3000G - 60,000 MNT</option>
+    <option value="5000G">5000G - 90,000 MNT</option>
+  </select>
+  <br>
+  <button onclick="showInfo()">Захиалах</button>
+
+  <div class="info" id="infoBox" style="display:none;"></div>
+</div>
+
+<footer>
+  🎅 Christmas Special • 2025<br>
+  📌 <a href="https://www.facebook.com/share/1CBytoYVwV/" target="_blank">Page Link</a>
+</footer>
+
+<script>
+const accountInfo = `
+🏦 Khan Bank: Ганбаяр Хүсэлбаяр / 5156447273<br>
+📱 MonPay: 80166216<br>
+🧾 Гүйлгээний утга: Facebook нэр
+`;
+
+function showInfo(){
+  const select = document.getElementById('tarifSelect');
+  const infoBox = document.getElementById('infoBox');
+  const value = select.value;
+
+  if(!value){
+    infoBox.style.display = 'block';
+    infoBox.innerHTML = '❗ Түргэн шуурхай захиалах тарифаа сонгоно уу';
+    return;
+  }
+
+  let price = '';
+  switch(value){
+    case '100G': price = '4,500 MNT'; break;
+    case '500G': price = '16,000 MNT'; break;
+    case '1000G': price = '24,000 MNT'; break;
+    case '3000G': price = '60,000 MNT'; break;
+    case '5000G': price = '90,000 MNT'; break;
+  }
+
+  infoBox.style.display = 'block';
+  infoBox.innerHTML = `
+    ✅ Сонгосон: <b>${value}</b><br>
+    💰 Үнэ: <b>${price}</b><br>
+    ${accountInfo}
+  `;
+}
+
+// Snow generator
+const snowCount = 40;
+for (let i = 0; i < snowCount; i++) {
+  let snow = document.createElement('div');
+  snow.className = 'snowflake';
+  snow.style.left = Math.random() * window.innerWidth + 'px';
+  snow.style.fontSize = Math.random() * 20 + 10 + 'px';
+  snow.style.animationDuration = (Math.random() * 5 + 5) + 's';
+  snow.innerText = '❄';
+  document.body.appendChild(snow);
+}
+</script>
+
+</body>
+</html>
